@@ -113,6 +113,7 @@ const CommentCard = styled.div`
 
 const VoteButton = styled.div`
   height: 90%;
+  min-width: 40px;
   margin-right: 20px;
 
   background-color: hsl(228, 33%, 97%);
@@ -120,6 +121,7 @@ const VoteButton = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
   padding: 0px 8px;
   border-radius: 8px;
 
@@ -128,6 +130,7 @@ const VoteButton = styled.div`
 
   img {
     cursor: pointer;
+    max-width: 11px;
   }
 
   img:hover{
