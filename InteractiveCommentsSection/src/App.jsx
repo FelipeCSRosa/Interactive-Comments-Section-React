@@ -2,7 +2,8 @@ import Comment from "./Components/Comment"
 import AddComment from "./Components/AddComment";
 
 import Data from "./data.json"
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import DeleteModal from "./Components/DeleteModal";
 
 localStorage.setItem('currentUser', Data.currentUser);
 
@@ -24,17 +25,28 @@ function App() {
   function DownVote(Idcomment, Idreply){
     if(Idreply === undefined){
       console.log("Comment")
-      setData(Data.comments.find(e => e.id === Idcomment).score -= 1)
+      let score = Data.comments.find(e => e.id === Idcomment).score;
+      if(score <= 0){
+        setData(Data.comments.find(e => e.id === Idcomment).score = 0)
+      }else{
+        setData(Data.comments.find(e => e.id === Idcomment).score -= 1)
+      }
       console.log(Data.comments.find(e => e.id === Idcomment));
     }else{
       console.log("Reply")
-      setData(Data.comments.find(e => e.id === Idcomment).replies.find(e => e.id === Idreply).score -= 1)
+      let score = Data.comments.find(e => e.id === Idcomment).replies.find(e => e.id === Idreply).score;
+      if(score <= 0){
+        setData(Data.comments.find(e => e.id === Idcomment).replies.find(e => e.id === Idreply).score = 0)
+      }else{
+        setData(Data.comments.find(e => e.id === Idcomment).replies.find(e => e.id === Idreply).score -= 1)
+      }
       console.log(Data.comments.find(e => e.id === Idcomment).replies.find(e => e.id === Idreply));
     }
   }
 
   return (
     <main>
+      <DeleteModal />
       {
         Data.comments.map( comment => {
           return (
