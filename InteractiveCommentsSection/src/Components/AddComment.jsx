@@ -18,14 +18,14 @@ const AddCommentCard = styled.div`
     width: 50px;
   }
 
-  input[type=text] {
+  textarea {
     width: 100%;
     margin: 0 20px;
     border-radius: 10px;
     border: 2px solid black;
-    outline: none;
-
     padding: 15px 22px;
+    resize: none;
+    font-family: 'DM Sans', sans-serif;
   }
 
   .button {
@@ -45,14 +45,14 @@ const AddCommentCard = styled.div`
   }
 `
 
-function AddComment({user}) {
+function AddComment({user, type}) {
   return (
     <AddCommentCard>
       <div>
         <img src={eval(user)} alt="" />
       </div>
-      <input type="text" />
-      <div className="button">SEND</div>
+      <textarea name="" id=""></textarea>
+      <div className="button">{type}</div>
     </AddCommentCard>
   )
 }

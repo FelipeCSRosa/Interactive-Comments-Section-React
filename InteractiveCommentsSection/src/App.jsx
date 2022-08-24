@@ -24,6 +24,7 @@ function App() {
   function DownVote(Idcomment, Idreply){
     if(Idreply === undefined){
       console.log("Comment")
+      setData(Data.comments.find(e => e.id === Idcomment).score -= 1)
       console.log(Data.comments.find(e => e.id === Idcomment));
     }else{
       console.log("Reply")
@@ -56,7 +57,7 @@ function App() {
           )
         })
       }
-      <AddComment user={localStorage.getItem("currentUser")}/>
+      <AddComment user={localStorage.getItem("currentUser")} type="SEND"/>
     </main>
   )
 }
