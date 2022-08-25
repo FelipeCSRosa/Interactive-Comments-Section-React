@@ -37,12 +37,16 @@ const CommentCard = styled.div`
   border-radius: 15px;
   background-color: white;
 
-  max-width: ${props => props.type == "reply"? "630px" : "700px"};
-  height: 150px;
+  width: ${props => props.type == "reply"? "630px" : "700px"};
+  min-height: 150px;
 
   padding: 20px;
 
   display: flex;
+
+  .CommentCardInfo {
+    width: 100%;
+  }
 
   header {
     display: flex;
@@ -109,10 +113,22 @@ const CommentCard = styled.div`
   .header-right .delete {
     display: ${props => props.user == localStorage.currentUser? "defaul" : "none"};
   }
+
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 15px 22px;
+    resize: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    display: none;
+  }
 `
 
 const VoteButton = styled.div`
-  height: 90%;
+  height: 100px;
   min-width: 40px;
   margin-right: 20px;
 
@@ -152,6 +168,16 @@ function Comment({Idcomment, Idreply, type, last, user, score, createdAt, conten
     openModal(Idcomment, Idreply);
   }
 
+
+  function openEdit(){
+
+    let text = document.querySelector(`.comment-text${Idcomment}${Idreply}`);
+    let editArea = document.querySelector(`#edit-area${Idcomment}${Idreply}`);
+
+    text.style.display = 'none';
+    editArea.style.display = "block";
+  }
+
   return (
     <CommentCardContainer type={type} last={last}>
       <div className="reply-line-container">
@@ -185,16 +211,18 @@ function Comment({Idcomment, Idreply, type, last, user, score, createdAt, conten
                 <p>Delete</p>
               </div>
 
-              <div className="action edit">
-                <img src={EditIcon} alt="" />
+              <div className="action edit" onClick={openEdit}>
+                <img src={EditIcon} alt=""/>
                 <p>Edit</p>
               </div>
             </div>
           </header>
 
-          <p>
+          <p className={`comment-text${Idcomment}${Idreply}`}>
             {content}
           </p>
+
+          <textarea name="" id={`edit-area${Idcomment}${Idreply}`} defaultValue={content}></textarea>
         </div>
       </CommentCard>
     </CommentCardContainer>

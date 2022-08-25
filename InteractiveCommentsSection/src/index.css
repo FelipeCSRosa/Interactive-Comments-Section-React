@@ -7,7 +7,7 @@
 }
 
 body {
-/*   padding-top: 50px; */
+  padding-top: 50px;
   background-color: hsl(228, 33%, 97%);
   font-family: 'DM Sans', sans-serif;
 
@@ -18,7 +18,6 @@ body {
 
 main {
   display: flex;
-  justify-content: center;
   align-items: flex-end;
 
   flex-direction: column;
