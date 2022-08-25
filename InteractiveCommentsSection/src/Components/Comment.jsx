@@ -138,7 +138,7 @@ const VoteButton = styled.div`
   }
 `
 
-function Comment({Idcomment, Idreply, type, last, user, score, createdAt, content, downVote, upVote}) {
+function Comment({Idcomment, Idreply, type, last, user, score, createdAt, content, downVote, upVote, openModal}) {
 
   function handleUpVote(){
     upVote(Idcomment, Idreply);
@@ -146,6 +146,10 @@ function Comment({Idcomment, Idreply, type, last, user, score, createdAt, conten
 
   function handleDownVote(){
     downVote(Idcomment, Idreply);
+  }
+
+  function handleOpenModal(){
+    openModal(Idcomment, Idreply);
   }
 
   return (
@@ -176,7 +180,7 @@ function Comment({Idcomment, Idreply, type, last, user, score, createdAt, conten
                 <p>Reply</p>
               </div>
 
-              <div className="action delete">
+              <div className="action delete" onClick={handleOpenModal}>
                 <img src={DeleteIcon} alt="" />
                 <p>Delete</p>
               </div>
