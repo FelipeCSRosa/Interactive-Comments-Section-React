@@ -31,13 +31,15 @@ const AddCommentCard = styled.div`
   .button {
     background-color: hsl(238, 40%, 52%);
     height: fit-content;
-    max-width: 90px;
+    min-width: 110px;
     font-size: 1.2rem;
     font-weight: 500;
-    padding: 0.4em 1em;
+    padding: 0.6em 1em;
     color: white;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
   }
 
   .button:hover {

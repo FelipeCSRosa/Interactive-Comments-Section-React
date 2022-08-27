@@ -114,6 +114,13 @@ const CommentCard = styled.div`
     display: ${props => props.user == localStorage.currentUser? "defaul" : "none"};
   }
 
+  .textarea-container {
+    display: none;
+    gap: 20px;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
   textarea {
     width: 100%;
     min-height: 100px;
@@ -123,7 +130,24 @@ const CommentCard = styled.div`
     resize: none;
     font-family: 'DM Sans', sans-serif;
     font-size: 1rem;
-    display: none;
+  }
+
+  .button {
+    background-color: hsl(238, 40%, 52%);
+    height: fit-content;
+    width: 110px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.6em 1em;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+  }
+
+  .button:hover {
+    opacity: 50%;
   }
 `
 
@@ -154,8 +178,7 @@ const VoteButton = styled.div`
   }
 `
 
-function Comment({Idcomment, Idreply, type, last, user, score, createdAt, content, downVote, upVote, openModal}) {
-
+function Comment({Idcomment, Idreply, type, last, user, score, createdAt, content, downVote, upVote, openModal, updateComment}) {
   function handleUpVote(){
     upVote(Idcomment, Idreply);
   }
@@ -168,14 +191,42 @@ function Comment({Idcomment, Idreply, type, last, user, score, createdAt, conten
     openModal(Idcomment, Idreply);
   }
 
+  let isEditOpen = false;
 
   function openEdit(){
+
+    if(isEditOpen){
+      let text = document.querySelector(`.comment-text${Idcomment}${Idreply}`);
+      let editArea = document.querySelector(`#edit-area${Idcomment}${Idreply}`);
+  
+      text.style.display = 'block';
+      editArea.style.display = "none";
+
+      isEditOpen = false;
+    }else {
+      let text = document.querySelector(`.comment-text${Idcomment}${Idreply}`);
+      let editArea = document.querySelector(`#edit-area${Idcomment}${Idreply}`);
+  
+      text.style.display = 'none';
+      editArea.style.display = "flex";
+
+      isEditOpen = true;
+    }
+
+  }
+
+  function handleUpdateComment(){
+    let newCommentText = document.querySelector(`#text-area${Idcomment}${Idreply}`).value;
 
     let text = document.querySelector(`.comment-text${Idcomment}${Idreply}`);
     let editArea = document.querySelector(`#edit-area${Idcomment}${Idreply}`);
 
-    text.style.display = 'none';
-    editArea.style.display = "block";
+    text.style.display = 'block';
+    editArea.style.display = "none";
+
+    isEditOpen = false;
+
+    updateComment(Idcomment,Idreply,newCommentText);
   }
 
   return (
@@ -222,7 +273,10 @@ function Comment({Idcomment, Idreply, type, last, user, score, createdAt, conten
             {content}
           </p>
 
-          <textarea name="" id={`edit-area${Idcomment}${Idreply}`} defaultValue={content}></textarea>
+          <div className="textarea-container" id={`edit-area${Idcomment}${Idreply}`}>
+            <textarea id={`text-area${Idcomment}${Idreply}`} name="" defaultValue={content}></textarea>
+            <div className="button" onClick={handleUpdateComment}>UPDATE</div>
+          </div>
         </div>
       </CommentCard>
     </CommentCardContainer>
