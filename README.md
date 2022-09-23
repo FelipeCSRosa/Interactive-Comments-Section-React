@@ -1,5 +1,3 @@
-# Carrinho-de-compras-React
-
-## Acesse o projeto [Carrinho-de-compras-React](https://felipecsrosa.github.io/LOL-Login-Screen/)
+# Interactive-Comments-Section-React
 
 ![Pint Projeto](./imgs/print-projeto.png)
