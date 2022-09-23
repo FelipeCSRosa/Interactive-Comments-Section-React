@@ -8,8 +8,7 @@
 
 body {
   padding-top: 50px;
-  /* background-color: hsl(228, 33%, 97%); */
-  background-color: black;
+  background-color: hsl(228, 33%, 97%);
   font-family: 'DM Sans', sans-serif;
 
   display: flex;
